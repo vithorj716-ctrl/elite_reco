@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { useRef, useState } from "react";
-import logo from "@/assets/logo-recolhe.png.asset.json";
+const logo = { url: "/midia/logo-recolhe.png" };
 import { cn } from "@/lib/utils";
 import { transicao } from "@/lib/animacao";
 import { PainelSecreto } from "@/components/app/painel-secreto";
