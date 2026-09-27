@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { cn } from "@/lib/utils";
 
-import mp4Desktop from "@/assets/video/bg-desktop.mp4.asset.json";
-import webmDesktop from "@/assets/video/bg-desktop.webm.asset.json";
-import mp4Mobile from "@/assets/video/bg-mobile.mp4.asset.json";
-import poster from "@/assets/video/bg-poster.webp.asset.json";
+const mp4Desktop = { url: "/midia/bg-desktop.mp4" };
+const webmDesktop = { url: "/midia/bg-desktop.webm" };
+const mp4Mobile = { url: "/midia/bg-mobile.mp4" };
+const poster = { url: "/midia/bg-poster.webp" };
 
 /**
  * Camada de vídeo cinematográfico do sistema inteiro.

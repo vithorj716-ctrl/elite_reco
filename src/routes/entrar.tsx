@@ -11,7 +11,7 @@ import { transicao } from "@/lib/animacao";
 import { BotaoInstalar } from "@/components/app/instalar-app";
 import { useFundoVideo } from "@/components/app/fundo-video";
 
-import logo from "@/assets/logo-recolhe.png.asset.json";
+const logo = { url: "/midia/logo-recolhe.png" };
 
 export const Route = createFileRoute("/entrar")({
   head: () => ({
