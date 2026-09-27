@@ -1,0 +1,55 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789503148451,
+      "tag": "0000_transferir_ordem_agente",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789861025434,
+      "tag": "0001_status_ordem_pendente_definicao_liberada",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789861217682,
+      "tag": "0002_ordens_colunas_valores_congelados",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1789861275987,
+      "tag": "0003_fluxo_definicao_liberacao_ordens",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1789861343599,
+      "tag": "0004_rpcs_aprovar_recusar_aceitar_ordem",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1789861380250,
+      "tag": "0005_backfill_ordens_valores_e_situacao",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1789861560821,
+      "tag": "0006_verificacao_fluxo_definicao_liberacao",
+      "breakpoints": true
+    }
+  ]
+}

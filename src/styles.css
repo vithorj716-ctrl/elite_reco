@@ -1,0 +1,499 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system — Recolhe (grafite + âmbar).
+ * Tema único escuro industrial. Todas as cores em oklch.
+ */
+
+@theme inline {
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-2xl: 10px;
+  --radius-3xl: 12px;
+  --radius-4xl: 16px;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-cromo: var(--cromo);
+  --color-cromo-escuro: var(--cromo-escuro);
+  --color-ouro: var(--ouro);
+  --color-ouro-escuro: var(--ouro-escuro);
+  --shadow-cromo: 0 1px 0 oklch(1 0 0 / 8%) inset, 0 8px 24px -14px oklch(0 0 0 / 70%);
+  --shadow-ouro: 0 0 0 1px oklch(0.783 0.145 68 / 22%), 0 10px 26px -16px oklch(0.783 0.145 68 / 55%);
+  --font-display: "Oswald", "Arial Narrow", sans-serif;
+  --font-sans: "Inter Tight", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 4px;
+  /* Widgets nativos (select, option, checkbox, scrollbar) no tema escuro. */
+  color-scheme: dark;
+
+
+  --background: oklch(0.176 0.004 285);
+  --foreground: oklch(0.921 0.004 85);
+  --surface: oklch(0.222 0.005 285);
+  --surface-raised: oklch(0.262 0.006 285);
+
+  /* Paleta extraída da marca: cromo (pistões) + ouro (raio) */
+  --cromo: oklch(0.905 0.003 260);
+  --cromo-escuro: oklch(0.66 0.006 260);
+  --ouro: oklch(0.802 0.132 82);
+  --ouro-escuro: oklch(0.63 0.113 74);
+  --gradiente-cromo: linear-gradient(
+    150deg,
+    oklch(0.96 0.002 260) 0%,
+    oklch(0.72 0.005 260) 38%,
+    oklch(0.93 0.003 260) 58%,
+    oklch(0.6 0.006 260) 100%
+  );
+  --gradiente-ouro: linear-gradient(
+    150deg,
+    var(--ouro) 0%,
+    oklch(0.86 0.14 88) 44%,
+    var(--ouro-escuro) 100%
+  );
+
+  --card: oklch(0.222 0.005 285);
+  --card-foreground: oklch(0.921 0.004 85);
+  --popover: oklch(0.236 0.006 285);
+  --popover-foreground: oklch(0.921 0.004 85);
+
+  --primary: oklch(0.783 0.145 68);
+  --primary-foreground: oklch(0.176 0.004 285);
+
+  --secondary: oklch(0.28 0.006 285);
+  --secondary-foreground: oklch(0.921 0.004 85);
+
+  --muted: oklch(0.262 0.006 285);
+  --muted-foreground: oklch(0.66 0.008 285);
+
+  --accent: oklch(0.3 0.02 68);
+  --accent-foreground: oklch(0.921 0.004 85);
+
+  --destructive: oklch(0.6 0.19 25);
+  --destructive-foreground: oklch(0.97 0.01 85);
+  --success: oklch(0.72 0.15 152);
+  --success-foreground: oklch(0.176 0.004 285);
+  --warning: oklch(0.8 0.14 85);
+  --warning-foreground: oklch(0.176 0.004 285);
+  --info: oklch(0.72 0.09 220);
+  --info-foreground: oklch(0.176 0.004 285);
+
+  --border: oklch(0.3 0.005 285);
+  --border-strong: oklch(0.38 0.006 285);
+  --input: oklch(0.3 0.005 285);
+  --ring: oklch(0.783 0.145 68);
+
+  --chart-1: oklch(0.783 0.145 68);
+  --chart-2: oklch(0.72 0.09 220);
+  --chart-3: oklch(0.72 0.15 152);
+  --chart-4: oklch(0.6 0.19 25);
+  --chart-5: oklch(0.66 0.008 285);
+
+  --sidebar: oklch(0.196 0.004 285);
+  --sidebar-foreground: oklch(0.8 0.006 285);
+  --sidebar-primary: oklch(0.783 0.145 68);
+  --sidebar-primary-foreground: oklch(0.176 0.004 285);
+  --sidebar-accent: oklch(0.26 0.006 285);
+  --sidebar-accent-foreground: oklch(0.921 0.004 85);
+  --sidebar-border: oklch(0.28 0.005 285);
+  --sidebar-ring: oklch(0.783 0.145 68);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    /* Cor base do documento: fica atrás do vídeo de fundo. */
+    background-color: var(--color-background);
+    /* Reserva a calha da barra: evita salto de layout entre páginas curtas e longas. */
+    scrollbar-gutter: stable;
+    /* Nenhuma tela deve gerar rolagem horizontal na página inteira. */
+    overflow-x: clip;
+  }
+
+  body {
+    /* Transparente para o vídeo de fundo global aparecer. */
+    background-color: transparent;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+
+  /* Controles nativos com altura e cor consistentes em todo o sistema. */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea {
+    min-height: 2.25rem;
+    font-size: 13.5px;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    accent-color: var(--primary);
+    width: 0.95rem;
+    height: 0.95rem;
+    cursor: pointer;
+  }
+
+  select {
+    cursor: pointer;
+  }
+
+  :disabled {
+    cursor: not-allowed;
+  }
+
+  /* Mídia nunca estoura o container. */
+  img,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+  }
+
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Barras de rolagem sempre visíveis e com contraste real. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: color-mix(in oklch, var(--foreground) 6%, transparent);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in oklch, var(--foreground) 28%, transparent);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in oklch, var(--primary) 70%, transparent);
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+}
+
+@utility label-caps {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, oklch(1 0 0 / 3%) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 3%) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Superfícies metálicas derivadas da marca */
+@utility texto-cromo {
+  background-image: var(--gradiente-cromo);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility texto-ouro {
+  background-image: var(--gradiente-ouro);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility barra-cromo {
+  background-image: var(--gradiente-cromo);
+}
+
+@utility barra-ouro {
+  background-image: var(--gradiente-ouro);
+}
+
+@utility risco-marca {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    background-image: var(--gradiente-ouro);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &:hover::before {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
+
+@utility press {
+  transition:
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  &:active:not(:disabled) {
+    transform: translateY(1px) scale(0.985);
+  }
+}
+
+/* Carregamento: brilho varrendo a superfície (substitui spinners). */
+@keyframes brilho-varredura {
+  from {
+    background-position: -160% 0;
+  }
+  to {
+    background-position: 260% 0;
+  }
+}
+
+@utility shimmer {
+  background-color: var(--surface-raised);
+  background-image: linear-gradient(
+    100deg,
+    transparent 20%,
+    oklch(1 0 0 / 7%) 42%,
+    oklch(0.783 0.145 68 / 9%) 50%,
+    oklch(1 0 0 / 7%) 58%,
+    transparent 80%
+  );
+  background-size: 220% 100%;
+  background-repeat: no-repeat;
+  animation: brilho-varredura 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Linha de tabela: risco âmbar no hover em vez de fundo colorido genérico. */
+@utility linha-tabela {
+  position: relative;
+  transition:
+    background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    background-image: var(--gradiente-ouro);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &:hover {
+    background-color: color-mix(in oklch, var(--surface-raised) 62%, transparent);
+  }
+
+  &:hover::after {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
+
+
+/* Campo de formulário padrão — mesmo foco em todo o sistema. */
+@utility campo {
+  width: 100%;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  padding: 0.5rem 0.75rem;
+  font-size: 13.5px;
+  color: var(--foreground);
+  outline: none;
+  transition:
+    border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  &::placeholder {
+    color: var(--muted-foreground);
+  }
+
+  &:hover:not(:disabled) {
+    border-color: var(--border-strong);
+  }
+
+  &:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary), 0 0 0 4px oklch(0.783 0.145 68 / 12%);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+/* Campo minimalista em linha (usado em formulários densos). */
+@utility campo-linha {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  padding-bottom: 0.25rem;
+  font-size: 13px;
+  color: var(--foreground);
+  outline: none;
+  transition:
+    border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  &:hover:not(:disabled) {
+    border-color: var(--border-strong);
+  }
+
+  &:focus {
+    border-color: var(--primary);
+    box-shadow: 0 1px 0 0 var(--primary);
+  }
+}
+
+/*
+ * Rolagem padronizada.
+ * rolagem-x: tabelas largas — rola só na horizontal, sem barra vertical fantasma.
+ * rolagem-y: listas com altura limitada — rola só na vertical, sem vazar para a página.
+ */
+@utility rolagem-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+@utility rolagem-y {
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Foco visível consistente em elementos interativos sem estilo próprio. */
+
+@layer base {
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}
+
+/* Respeita quem prefere menos movimento. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* Emissão de documentos — fatura, recibo e laudo */
+@media print {
+  body.modo-documento {
+    background: #fff;
+  }
+  body.modo-documento .nao-imprimir,
+  body.modo-documento aside,
+  body.modo-documento header.app-topo {
+    display: none !important;
+  }
+  body.modo-documento .folha {
+    border: none;
+    padding: 0;
+    background: #fff;
+  }
+  body.modo-documento,
+  body.modo-documento * {
+    color: #16181c !important;
+    box-shadow: none !important;
+  }
+  body.modo-documento .folha img {
+    break-inside: avoid;
+  }
+  @page {
+    margin: 14mm;
+  }
+}

@@ -1,0 +1,10 @@
+ALTER TABLE public.ordem_cobrancas REPLICA IDENTITY FULL;
+ALTER TABLE public.ordem_evidencias REPLICA IDENTITY FULL;
+ALTER TABLE public.lancamentos_agente REPLICA IDENTITY FULL;
+ALTER TABLE public.tabelas_remuneracao REPLICA IDENTITY FULL;
+ALTER TABLE public.itens_remuneracao REPLICA IDENTITY FULL;
+ALTER TABLE public.locadora_apelidos REPLICA IDENTITY FULL;
+ALTER TABLE public.configuracoes REPLICA IDENTITY FULL;
+CREATE INDEX IF NOT EXISTS ordem_evidencias_locadora_idx ON public.ordem_evidencias (locadora_id);
+CREATE INDEX IF NOT EXISTS ordem_cobrancas_locadora_idx ON public.ordem_cobrancas (locadora_id);
+CREATE INDEX IF NOT EXISTS ordens_criada_em_idx ON public.ordens (criada_em DESC);

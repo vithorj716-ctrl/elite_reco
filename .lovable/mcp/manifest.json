@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.1",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "enchanted-interfaces",
+      "version": "0.1.0",
+      "title": "Enchanted Interfaces"
+    },
+    "tools": [
+      {
+        "name": "referencia_sistema",
+        "title": "Referência do sistema",
+        "description": "Lista os valores de referência do sistema de recolhimentos: status de ordem, prioridades e itens do checklist de vistoria. Os serviços são configuráveis no banco.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "prioridades": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "checklist_vistoria": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "status",
+            "prioridades",
+            "checklist_vistoria"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        }
+      }
+    ]
+  }
+}
