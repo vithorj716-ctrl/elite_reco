@@ -10,6 +10,8 @@ import { CampoSenha } from "@/components/app/campo-senha";
 import { transicao } from "@/lib/animacao";
 import { BotaoInstalar } from "@/components/app/instalar-app";
 import { useFundoVideo } from "@/components/app/fundo-video";
+import { useServerFn } from "@tanstack/react-start";
+import { definirSenhaPendente, verificarSenhaPendente } from "@/lib/senha-pendente.functions";
 
 const logo = { url: "/midia/logo-recolhe.png" };
 
@@ -48,6 +50,9 @@ function Entrar() {
   const [erro, setErro] = useState<string | null>(null);
   const [capsLock, setCapsLock] = useState(false);
   const campoEmail = useRef<HTMLInputElement>(null);
+  const [novaSenha, setNovaSenha] = useState<null | { senha: string; confirma: string }>(null);
+  const verificar = useServerFn(verificarSenhaPendente);
+  const definir = useServerFn(definirSenhaPendente);
 
   // Login é a tela onde a cena de fundo aparece com mais força.
   useFundoVideo("alta");
@@ -67,6 +72,15 @@ function Entrar() {
     setErro(null);
     setEnviando(true);
     const r = await entrar(email, senha);
+    if (!r.ok) {
+      const p = await verificar({ data: { email: email.trim() } }).catch(() => ({ pendente: false }));
+      if (p.pendente) {
+        setEnviando(false);
+        setSenha("");
+        setNovaSenha({ senha: "", confirma: "" });
+        return;
+      }
+    }
     setEnviando(false);
     if (!r.ok) {
       setErro(r.erro ?? "Não foi possível entrar.");
@@ -75,6 +89,27 @@ function Entrar() {
     }
     window.localStorage.setItem(CHAVE_EMAIL, email.trim());
     toast.success("Bem-vindo de volta.");
+  }
+
+  async function salvarNova(e: React.FormEvent) {
+    e.preventDefault();
+    if (!novaSenha) return;
+    setErro(null);
+    if (novaSenha.senha.length < 8) return setErro("A senha precisa ter pelo menos 8 caracteres.");
+    if (novaSenha.senha !== novaSenha.confirma) return setErro("As senhas não coincidem.");
+    setEnviando(true);
+    const r = await definir({ data: { email: email.trim(), senha: novaSenha.senha } }).catch(() => ({ ok: false, erro: "Não foi possível salvar a senha." }));
+    if (!r.ok) {
+      setEnviando(false);
+      setErro(("erro" in r && r.erro) || "Não foi possível salvar a senha.");
+      return;
+    }
+    const l = await entrar(email, novaSenha.senha);
+    setEnviando(false);
+    if (!l.ok) return setErro(l.erro ?? "Senha salva, mas não foi possível entrar.");
+    window.localStorage.setItem(CHAVE_EMAIL, email.trim());
+    setNovaSenha(null);
+    toast.success("Senha criada. Bem-vindo.");
   }
 
   return (
@@ -154,6 +189,40 @@ function Entrar() {
           </h1>
           <p className="mt-1.5 text-[13px] text-muted-foreground">Use suas credenciais da operação.</p>
 
+          {novaSenha ? (
+            <form onSubmit={salvarNova} className="mt-7 space-y-4" noValidate>
+              <p className="border-l-2 border-primary bg-primary/8 px-3 py-2 text-[12.5px]">
+                Primeiro acesso no sistema novo. Crie sua senha para <strong>{email.trim()}</strong>.
+              </p>
+              <Campo rotulo="Nova senha">
+                <CampoSenha
+                  value={novaSenha.senha}
+                  onChange={(e) => setNovaSenha({ ...novaSenha, senha: e.target.value })}
+                  autoComplete="new-password"
+                  className="campo"
+                />
+              </Campo>
+              <Campo rotulo="Confirmar senha">
+                <CampoSenha
+                  value={novaSenha.confirma}
+                  onChange={(e) => setNovaSenha({ ...novaSenha, confirma: e.target.value })}
+                  autoComplete="new-password"
+                  className="campo"
+                />
+              </Campo>
+              {erro && (
+                <p role="alert" className="border-l-2 border-destructive bg-destructive/8 px-3 py-2 text-[12.5px] text-destructive">
+                  {erro}
+                </p>
+              )}
+              <Botao type="submit" carregando={enviando} tamanho="lg" className="w-full">
+                Salvar senha e entrar
+              </Botao>
+              <button type="button" onClick={() => { setNovaSenha(null); setErro(null); }} className="w-full text-[12px] text-muted-foreground underline">
+                Voltar
+              </button>
+            </form>
+          ) : (
           <form onSubmit={submeter} className="mt-7 space-y-4" noValidate>
             <Campo rotulo="E-mail">
               <input
@@ -215,6 +284,7 @@ function Entrar() {
               )}
             </Botao>
           </form>
+          )}
 
           <BotaoInstalar className="mt-5" />
 
