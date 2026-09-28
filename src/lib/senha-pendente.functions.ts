@@ -7,7 +7,9 @@ function cfg() {
   const url = (process.env["SUPABASE_URL"] ?? process.env["VITE_SUPABASE_URL"] ?? "").replace(/\/$/, "");
   const key = process.env["SUPABASE_SERVICE_ROLE_KEY"] ?? process.env["BANCO_SERVICE_ROLE_KEY"] ?? "";
   if (!url || !key) throw new Error("Configuração do servidor ausente.");
-  return { url, h: { apikey: key, "Content-Type": "application/json" } as Record<string, string> };
+  const h: Record<string, string> = { apikey: key, "Content-Type": "application/json" };
+  if (!key.startsWith("sb_")) h["Authorization"] = `Bearer ${key}`;
+  return { url, h };
 }
 
 async function buscar(email: string): Promise<string | null> {
